@@ -1,0 +1,7 @@
+C:\Users\Sony\source\repos\HW1\HW1\bin\Debug\HW1.exe.config
+C:\Users\Sony\source\repos\HW1\HW1\bin\Debug\HW1.exe
+C:\Users\Sony\source\repos\HW1\HW1\bin\Debug\HW1.pdb
+C:\Users\Sony\source\repos\HW1\HW1\obj\Debug\HW1.csprojResolveAssemblyReference.cache
+C:\Users\Sony\source\repos\HW1\HW1\obj\Debug\HW1.csproj.CoreCompileInputs.cache
+C:\Users\Sony\source\repos\HW1\HW1\obj\Debug\HW1.exe
+C:\Users\Sony\source\repos\HW1\HW1\obj\Debug\HW1.pdb
