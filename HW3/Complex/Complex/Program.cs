@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HW2
+namespace Complex
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Student s = new Student("Sanzhar", "Seitzhan");
-            Console.Write(s);
+            int[] arr = Console.ReadLine().Split(' ').Take(4).Select(int.Parse).ToArray();
+            Complex a = new Complex(arr[0], arr[1]),b = new Complex(arr[2],arr[3]);
+            Console.WriteLine(a + b);
             Console.ReadKey();
         }
     }
-
 }

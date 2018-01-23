@@ -24,5 +24,9 @@ namespace HW2
         {
             return 2 * (h + w);
         }
+        public override string ToString()
+        {
+            return h + " " + w;
+        }
     }
 }

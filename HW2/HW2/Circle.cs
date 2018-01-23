@@ -17,5 +17,9 @@ namespace HW2
         {
             return Math.PI * r * r;
         }
+        public double CalcPerimetr()
+        {
+            return 2.0 * Math.PI * r;
+        }
     }
 }

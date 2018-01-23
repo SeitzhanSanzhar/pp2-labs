@@ -16,6 +16,11 @@ namespace HW2
             lastName = curLastName;
             gpa = curGpa;
         }
+        public Student(string name,string lastName)
+        {
+            this.name = name;
+            this.lastName = lastName;
+        }
         public override string ToString()
         {
             return name + " " + lastName + gpa;
