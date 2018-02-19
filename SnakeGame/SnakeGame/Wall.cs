@@ -33,7 +33,7 @@ namespace SnakeGame
                 string cur = sr.ReadLine();
                 for(int i = 0;i < cur.Length;i ++)
                 {
-                    if(cur[i] == '#')
+                    if(cur[i] == '*')
                     {
                         wall.Add(new Point(i, row));
                     }
@@ -42,6 +42,12 @@ namespace SnakeGame
         }
         public void DrawMap()
         {
+            if (Snake.wasEated <= 3)
+                ShowMapLevel(1);
+            else if (Snake.wasEated > 3 && Snake.wasEated <= 6)
+                ShowMapLevel(2);
+            else
+                ShowMapLevel(3);
             Console.ForegroundColor = consoleColor;
             for(int i = 0;i < wall.Count;i ++)
             {
