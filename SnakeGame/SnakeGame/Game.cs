@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     class Game
     {
         static public Snake snake = new Snake();
@@ -24,6 +25,28 @@ namespace SnakeGame
             wall.DrawMap();
             food.DrawFood();
             snake.DrawSnake();
+        }
+
+        public static void Set(DataSave x)
+        {
+            if (x.GameOver == false)
+            {
+                level = x.level;
+                snake = x.snake;
+                wall = x.wall;
+                food = x.food;
+                score = x.score;
+                Gameover = x.GameOver;
+            }
+            else
+            {
+                snake = new Snake();
+                wall = new Wall();
+                food = new Food();
+                score = 0;
+                Gameover = false;
+                level = 0;
+            }
         }
     }
 }

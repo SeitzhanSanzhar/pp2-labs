@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     class Wall
     {
         public  List<Point> wall;
@@ -23,7 +24,7 @@ namespace SnakeGame
 
         public void ShowMapLevel(int idLevel)
         {
-            string fileName = @"C:\Users\Sony\Desktop\level" + idLevel.ToString() + ".txt";
+            string fileName = @"C:\Users\Sony\Desktop\level" + idLevel + ".txt";
 
             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
@@ -42,14 +43,25 @@ namespace SnakeGame
         }
         public void DrawMap()
         {
-            if (Snake.wasEated <= 3)
+            if (Game.score == 3)
+            {
                 ShowMapLevel(1);
-            else if (Snake.wasEated > 3 && Snake.wasEated <= 6)
+                Game.level = 2;
+            }
+            if (Game.score == 6)
+            {
                 ShowMapLevel(2);
-            else
+                Game.level = 2;
+            }
+            if (Game.score == 9)
+            {
                 ShowMapLevel(3);
+                Game.level = 3;
+            }
+
             Console.ForegroundColor = consoleColor;
-            for(int i = 0;i < wall.Count;i ++)
+
+            for (int i = 0;i < wall.Count;i ++)
             {
                 Console.SetCursorPosition(wall[i].x, wall[i].y);
                 Console.Write(symbole);

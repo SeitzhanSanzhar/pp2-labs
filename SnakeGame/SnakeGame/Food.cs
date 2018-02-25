@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     class Food
     {
         public Point position = new Point();

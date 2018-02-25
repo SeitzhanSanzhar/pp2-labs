@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace SnakeGame
 {
+    [Serializable]
     class Snake
     {
         public List<Point> body;
         public char sign;
         public int dir;
-        public static int wasEated;
+        public int wasEated;
         public ConsoleColor snakeColor;
 
         public Snake()
@@ -29,6 +30,9 @@ namespace SnakeGame
 
         public void Move(int dx,int dy,Wall wall)
         {
+            Console.SetCursorPosition(body[body.Count - 1].x, body[body.Count - 1].y);
+            Console.Write(' ');
+
             for (int i = body.Count - 1;i > 0;i --)
             {
                 body[i].x = body[i - 1].x;
@@ -43,7 +47,8 @@ namespace SnakeGame
             if (body[0].y < 0) body[0].y = 19;
             if (body[0].y > 19) body[0].y = 0;
 
-            Eat(Game.food);
+            if (Eat(Game.food))
+                Game.snake.wasEated++;
 
             for (int i = 0;i < body.Count;i ++)
             {
@@ -68,7 +73,7 @@ namespace SnakeGame
 
         }
 
-        public void Eat(Food food)
+        public bool Eat(Food food)
         {
             if(body[0].x == food.position.x && body[0].y == food.position.y)
             {
@@ -76,10 +81,14 @@ namespace SnakeGame
                 Game.food.SetRandomPosition(Game.snake, Game.wall);     
                 Game.food.DrawFood();
                 body.Add(new Point(body[body.Count - 1].x, body[body.Count - 1].y));
+                return true;
             }
+            return false;
         }
+
         public void DrawSnake()
         {
+          
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(body[0].x, body[0].y);
             Console.Write(sign);
