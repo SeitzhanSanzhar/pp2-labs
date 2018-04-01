@@ -16,6 +16,7 @@ namespace Calculator
         public static string contentA = "", contentB = "", operation = null;
         public static string curNumber = "";
         public static double curRes = 0;
+        public static double memorySave = 0;
 
         public Form1()
         {
@@ -27,7 +28,7 @@ namespace Calculator
             Button wasPressed = sender as Button;
             string digit = wasPressed.Text;
             curNumber += digit;
-            label1.Text = curNumber;
+            Output.Text = curNumber;
         }
 
         private void buttonOperation(object sender, EventArgs e)
@@ -35,35 +36,46 @@ namespace Calculator
             Button wasPressed = sender as Button;
             operation = wasPressed.Text;
             double convertB = 0;
-            if(curNumber != "")
+            if (curNumber != "")
             {
                 convertB = double.Parse(curNumber);
-            } else
+            }
+            else
             {
                 convertB = curRes;
             }
             double resultOfCalc = 0;
-            switch(operation)
+            switch (operation)
             {
                 case "√":
                     resultOfCalc = Math.Sqrt(convertB);
-                    Clear(resultOfCalc,0);
-                    label1.Text = resultOfCalc.ToString();
+                    Clear(resultOfCalc, 0);
+                    Output.Text = resultOfCalc.ToString();
                     break;
                 case "x ^ 2":
                     resultOfCalc = convertB * convertB;
                     Clear(resultOfCalc, 0);
-                    label1.Text = resultOfCalc.ToString();
+                    Output.Text = resultOfCalc.ToString();
                     break;
                 case "1/x":
                     resultOfCalc = (1 / convertB);
                     Clear(resultOfCalc, 0);
-                    label1.Text = resultOfCalc.ToString();
+                    Output.Text = resultOfCalc.ToString();
                     break;
                 case "log":
                     resultOfCalc = Math.Log(convertB);
                     Clear(resultOfCalc, 0);
-                    label1.Text = resultOfCalc.ToString();
+                    Output.Text = resultOfCalc.ToString();
+                    break;
+                case "sin":
+                    resultOfCalc = Math.Sin(convertB);
+                    Clear(resultOfCalc, 0);
+                    Output.Text = resultOfCalc.ToString();
+                    break;
+                case "cos":
+                    resultOfCalc = Math.Cos(convertB);
+                    Clear(resultOfCalc, 0);
+                    Output.Text = resultOfCalc.ToString();
                     break;
                 default:
                     contentA = curNumber;
@@ -78,7 +90,7 @@ namespace Calculator
             curRes = 0;
             contentA = "";
             contentB = "";
-            label1.Text = "0";
+            Output.Text = "0";
         }
 
         private void Data(object sender, EventArgs e)
@@ -86,30 +98,29 @@ namespace Calculator
             Button wasPressed = sender as Button;
             string name = wasPressed.Text;
 
-            FileStream fs = new FileStream(@"dataCalc.bin",FileMode.OpenOrCreate,FileAccess.ReadWrite);
-            StreamReader sr = new StreamReader(fs);
-            FileStream fs1 = new FileStream(@"dataCalc.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            StreamWriter sw = new StreamWriter(fs1);
-
             switch (name)
             {
-                case "mc":
-                    fs = new FileStream(@"data.bin", FileMode.Create, FileAccess.ReadWrite);
+                case "MC":
+                    memorySave = 0;
                     break;
-                case "m":
-                    string res = sr.ReadToEnd();
-                    label1.Text = res;
+                case "MR":
+                    string res = memorySave.ToString();
+                    Output.Text = res;
                     break;
-                case "+m":
-                    sw.WriteLine(curRes);
+                case "M+":
+                    memorySave += int.Parse(Output.Text);
                     break;
-                case "-m":
+                case "M-":
+                    memorySave -= int.Parse(Output.Text);
                     break;
             }
-            fs.Close();
-            fs1.Close();
-            sw.Close();
-            sr.Close();
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            Output.Text = Output.Text.Remove(Output.Text.Length - 1);
+            if (Output.Text.Length <= 0)
+                Output.Text = "0";
         }
 
         private void buttonOutput(object sender, EventArgs e)
@@ -122,11 +133,11 @@ namespace Calculator
             else convertA = double.Parse(contentA);
             if (curNumber == "") convertB = double.Parse(contentB);
             else convertB = double.Parse(curNumber);
-            switch(operation)
+            switch (operation)
             {
                 case "+":
                     resultOfCalc = convertA + convertB;
-                    Clear(resultOfCalc,convertB);
+                    Clear(resultOfCalc, convertB);
                     break;
                 case "-":
                     resultOfCalc = convertA - convertB;
@@ -154,9 +165,9 @@ namespace Calculator
                     break;
             }
 
-            label1.Text = resultOfCalc.ToString();
+            Output.Text = resultOfCalc.ToString();
         }
-        public static void Clear(double x,double xB)
+        public static void Clear(double x, double xB)
         {
             contentA = "";
 
