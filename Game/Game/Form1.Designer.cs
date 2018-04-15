@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Player = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -36,6 +37,7 @@
             // Player
             // 
             this.Player.AutoSize = true;
+            this.Player.Image = ((System.Drawing.Image)(resources.GetObject("Player.Image")));
             this.Player.Location = new System.Drawing.Point(159, 259);
             this.Player.Name = "Player";
             this.Player.Size = new System.Drawing.Size(16, 13);
@@ -53,6 +55,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(343, 291);
             this.Controls.Add(this.Player);
             this.Name = "Form1";

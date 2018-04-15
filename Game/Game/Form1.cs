@@ -18,10 +18,15 @@ namespace Game
         public Form1()
         {
             InitializeComponent();
-            int x = 10;
+            int x = 5;
             InitStone(x);
+            Player.ForeColor = Color.Blue;
+            Player.BackColor = Color.Black;
             for (int i = 0; i < x; i++)
             {
+                labels[i].ForeColor = Color.Red;
+                labels[i].AutoSize = true;
+                labels[i].BackColor = Color.Black;
                 Controls.Add(labels[i]);
             }
         }
@@ -35,7 +40,7 @@ namespace Game
                 int newX = rnd.Next(5, 300), newY = rnd.Next(5, 120);
                 while (used[newX, newY])
                 {
-                    newX = rnd.Next(5, 325);
+                    newX = rnd.Next(5, 300);
                     newY = rnd.Next(5, 120);
                 }
                 used[newX, newY] = true;
@@ -78,6 +83,12 @@ namespace Game
                     return;
                 }
             }
+        }
+        public static bool Can(Label A, Label B)
+        {
+            Point BP = B.Location, AP = A.Location;
+            if (BP.Y == AP.Y && (AP.Y + (A.Width / 2) >= (BP.Y - (B.Width / 2)))) return true;
+            return false;
         }
         public static bool touch(int x, int y, int xCalc, int yCalc, int X, int Y, int xLCalc, int yLCalc)
         {

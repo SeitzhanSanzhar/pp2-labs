@@ -47,7 +47,7 @@ namespace AsteroidGame
         }
         public static void InitStones()
         {
-            int cntStone = 1;
+            int cntStone = 5;
             for(int i = 1;i <= cntStone;i ++)
             {
                 Random random = new Random();
@@ -128,18 +128,40 @@ namespace AsteroidGame
         {
             if (gameOver) return;
             char pressed = e.KeyChar;
-            switch(pressed)
+            int newX = 0, newY = 0;
+            switch (pressed)
             {
                 case 'a':
-                    Player.Location = new Point(Player.Location.X - shipShift, Player.Location.Y);
+                    newX = Player.Location.X;
+                    newX -= shipShift;
+                    if(newX < 0)
+                    {
+                        newX = Width - Player.Width;
+                    }
+                    Player.Location = new Point(newX, Player.Location.Y);
                     break;
                 case 'd':
-                    Player.Location = new Point(Player.Location.X + shipShift, Player.Location.Y);
+                    newX = Player.Location.X;
+                    newX += shipShift;
+                    newX %= Width;
+
+                    Player.Location = new Point(newX, Player.Location.Y);
                     break;
                 case 'w':
-                    Player.Location = new Point(Player.Location.X, Player.Location.Y - shipShift);
+                    newY = Player.Location.Y;
+                    newY -= shipShift;
+                    if (newY < 0)
+                    {
+                        newY = Width - Player.Height;
+                    }
+
+                    Player.Location = new Point(Player.Location.X, newY);
                     break;
                 case 's':
+                    newY = Player.Location.Y;
+                    newY += shipShift;
+                    newY %= Height;
+
                     Player.Location = new Point(Player.Location.X, Player.Location.Y + shipShift);
                     break;
                 case 'f':
